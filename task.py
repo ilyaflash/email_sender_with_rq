@@ -6,9 +6,8 @@ def send_mail_from_app4hiiigmailcom(send_conf, n_try=3):
         try:
             server = smtplib.SMTP_SSL(host='smtp.gmail.com', port=465)
             server.login(user='app4hiii@gmail.com', password='bc8yqrevyud')
-            status = server.sendmail(from_addr='app4hiii@gmail.com', 
-                                     to_addrs=send_conf['to_addrs'], 
-                                     msg='Subject: {}\n\n{}'.format(send_conf['subject'], send_conf['msg']))
+            msg = 'Subject: {}\n\n{}'.format(send_conf['subject'], send_conf['msg']).encode('utf-8')
+            status = server.sendmail(from_addr='app4hiii@gmail.com', to_addrs=send_conf['to_addrs'], msg=msg)
             server.close()
             if not(status):
                 return True
